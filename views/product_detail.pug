@@ -1,0 +1,20 @@
+extends layout
+
+block content
+  h1 !{product.name}
+
+  p #[strong Description:] !{product.desc}
+  p #[strong Price:] £#{product.price}
+  p #[strong Category: ] 
+    a(href=product.category.url) #{product.category.name}
+  p #[strong Quantity Available:] #{product.noInStock}
+  p #[strong Product Image:]
+
+  img(src=product.imagePath alt='product image' style='height:300px;')
+
+  hr
+  p
+    a(href=product.url+'/delete') Delete product
+  hr
+  p
+    a(href=product.url+'/update') Update product
