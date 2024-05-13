@@ -2,9 +2,7 @@
 
 Shop inventory app built using Express, MongoDB, and Pug as part of the Odin Project curriculum: https://www.theodinproject.com/lessons/nodejs-inventory-application
 
-An Inventory management app for an imaginary store, with categories and items. The user goes to the home-page and can choose a category to view, and then get a list of every item in that category. Users can Create, Read, Update or Delete any Item or Category.
-
-Destructive actions (like deleting and updating) are prevented by making users enter a secret admin password to confirm the action.
+A basic inventory management app for an imaginary store, with categories and items. The user goes to the home-page and can choose a category to view, and then get a list of every item in that category. Users can Create, Read, Update or Delete any Item or Category.
 
 ![image](https://github.com/Melanie-J-Baker/inventory-app/assets/104843873/b7e0a8ca-9b6c-4586-b8a9-4714ab5abcc9)
 ![image](https://github.com/Melanie-J-Baker/inventory-app/assets/104843873/4efbc502-0a51-46a9-9eed-97deb0f6376a)
