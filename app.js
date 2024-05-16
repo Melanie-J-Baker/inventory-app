@@ -25,9 +25,7 @@ app.use(limiter);
 const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
-const dev_db_url =
-  "mongodb+srv://bakermel:OykapH9XbyMDUnkX@cluster0.eqgpeey.mongodb.net/inventory-app?retryWrites=true&w=majority";
-const mongoDB = process.env.MONGODB_URI || dev_db_url;
+const mongoDB = process.env.MONGODB_URI;
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
