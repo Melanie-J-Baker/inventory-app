@@ -3,7 +3,7 @@ const Category = require("../models/category");
 const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
-exports.index = asyncHandler(async (req, res, next) => {
+exports.index = asyncHandler(async (req, res) => {
   // Get details of products and category counts (in parallel)
   const [numProducts, numCategories] = await Promise.all([
     Product.countDocuments({}).exec(),
@@ -18,7 +18,7 @@ exports.index = asyncHandler(async (req, res, next) => {
 });
 
 // Display list of all products.
-exports.product_list = asyncHandler(async (req, res, next) => {
+exports.product_list = asyncHandler(async (req, res) => {
   const allProducts = await Product.find({}, "name category")
     .sort({ name: 1 })
     .populate("category")
@@ -51,7 +51,7 @@ exports.product_detail = asyncHandler(async (req, res, next) => {
 });
 
 // Display product create form on GET.
-exports.product_create_get = asyncHandler(async (req, res, next) => {
+exports.product_create_get = asyncHandler(async (req, res) => {
   // Get all categories, which we can use for adding to our product.
   const allCategories = await Category.find().sort({ name: 1 }).exec();
   res.render("product_form", {
@@ -75,7 +75,7 @@ exports.product_create_post = [
   body("category.*").escape(),
   body("noInStock", "Must be at least one product in stock").isInt({ min: 1 }),
   // Process request after validation and sanitization.
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
@@ -116,7 +116,7 @@ exports.product_create_post = [
 ];
 
 // Display Product delete form on GET.
-exports.product_delete_get = asyncHandler(async (req, res, next) => {
+exports.product_delete_get = asyncHandler(async (req, res) => {
   // Get details of product
   const product = await Product.findById(req.params.id)
     .populate("category")
@@ -134,7 +134,7 @@ exports.product_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle Product delete on POST.
-exports.product_delete_post = asyncHandler(async (req, res, next) => {
+exports.product_delete_post = asyncHandler(async (req, res) => {
   // Get details of product
   const product = await Product.findById(req.params.id)
     .populate("category")
@@ -192,7 +192,7 @@ exports.product_update_post = [
   body("noInStock", "Must be at least one product in stock").isInt({ min: 1 }),
 
   // Process request after validation and sanitization.
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 

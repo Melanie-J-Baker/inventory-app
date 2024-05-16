@@ -26,7 +26,7 @@ const mongoose = require("mongoose");
 
 mongoose.set("strictQuery", false);
 const dev_db_url =
-  "mongodb+srv://Bakermel:ShatnersBassoon@cluster0.udqfijt.mongodb.net/inventoryApp?retryWrites=true&w=majority";
+  "mongodb+srv://bakermel:OykapH9XbyMDUnkX@cluster0.eqgpeey.mongodb.net/inventory-app?retryWrites=true&w=majority";
 const mongoDB = process.env.MONGODB_URI || dev_db_url;
 main().catch((err) => console.log(err));
 async function main() {
@@ -62,7 +62,7 @@ app.use(function (req, res, next) {
 });
 
 // error handler
-app.use(function (err, req, res, next) {
+app.use(function (err, req, res) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get("env") === "development" ? err : {};

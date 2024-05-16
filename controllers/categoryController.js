@@ -4,7 +4,7 @@ const asyncHandler = require("express-async-handler");
 const { body, validationResult } = require("express-validator");
 
 // Display list of all Categories.
-exports.category_list = asyncHandler(async (req, res, next) => {
+exports.category_list = asyncHandler(async (req, res) => {
   const allCategories = await Category.find().sort({ name: 1 }).exec();
   res.render("category_list", {
     title: "Category List",
@@ -34,7 +34,7 @@ exports.category_detail = asyncHandler(async (req, res, next) => {
 });
 
 // Display Category create form on GET.
-exports.category_create_get = (req, res, next) => {
+exports.category_create_get = (req, res) => {
   res.render("category_form", { title: "Create Category" });
 };
 
@@ -51,7 +51,7 @@ exports.category_create_post = [
     .escape(),
 
   // Process request after validation and sanitization.
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
@@ -85,7 +85,7 @@ exports.category_create_post = [
 ];
 
 // Display Category delete form on GET.
-exports.category_delete_get = asyncHandler(async (req, res, next) => {
+exports.category_delete_get = asyncHandler(async (req, res) => {
   // Get details of category and all products (in parallel)
   const [category, allProductsByCategory] = await Promise.all([
     Category.findById(req.params.id).exec(),
@@ -105,7 +105,7 @@ exports.category_delete_get = asyncHandler(async (req, res, next) => {
 });
 
 // Handle Category delete on POST.
-exports.category_delete_post = asyncHandler(async (req, res, next) => {
+exports.category_delete_post = asyncHandler(async (req, res) => {
   // Get details of category and all products (in parallel)
   const [category, allProductsByCategory] = await Promise.all([
     Category.findById(req.params.id).exec(),
@@ -157,7 +157,7 @@ exports.category_update_post = [
     .escape(),
 
   // Process request after validation and sanitization.
-  asyncHandler(async (req, res, next) => {
+  asyncHandler(async (req, res) => {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
